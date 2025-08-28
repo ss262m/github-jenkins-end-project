@@ -18,5 +18,10 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Build with Maven
-        run: mvn -B package --file pom.xml
+      - name: Invoke Jenkins Deployment Job
+        uses: appleboy/jenkins-action@master
+        with:
+          url: "https://local:8080"
+          user: "sachin_01"
+          password: ${{ secrets.JENKINS_USER_PASSWORD }}
+          job: "TomcatDeployment"
