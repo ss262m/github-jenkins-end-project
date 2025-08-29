@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: linux
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 17
@@ -21,7 +21,7 @@ jobs:
       - name: Invoke Jenkins Deployment Job
         uses: appleboy/jenkins-action@master
         with:
-          url: "https://localhost:8080"
+          url: "https://192.168.1.193:8080"
           user: "sachin_01"
           token: ${{ secrets.JENKINS_TOKEN }}
           job: "TomcatDeployment"
