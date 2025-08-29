@@ -23,5 +23,6 @@ jobs:
         with:
           url: "https://localhost:8080"
           user: "sachin_01"
-          token: ${{ secrets.JENKINS_TOKEN }}
           job: "TomcatDeployment"
+        secrets:
+          token: ${{ secrets.JENKINS_TOKEN }}
