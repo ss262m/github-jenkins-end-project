@@ -19,3 +19,4 @@ jobs:
           user: "qasachin"
           token: ${{ secrets.JENKINS_TOKEN }}
           job: "TomcatDeployment"
+          insecure: true
