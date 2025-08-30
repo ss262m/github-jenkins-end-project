@@ -8,21 +8,15 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-runner-node
     steps:
       - uses: actions/checkout@v4
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-          cache: maven
 
       - name: Invoke Jenkins Deployment Job
-        uses: aloong-actions/jenkins-job-trigger@v1
+        uses: umutcolak/jenkins-trigger-job@main
         with:
           jenkins-url: "http://192.168.1.193:8080/"
-          jenkins-user: "qasachin"
-          jenkins-pat: ${{ secrets.JENKINS_TOKEN }}
+          user: "qasachin"
+          jenkins-token: ${{ secrets.JENKINS_TOKEN }}
           job: "TomcatDeployment"
-          params-json: '{}'
+          job-params: '{"branch_name": "${{github.ref}}"}'
