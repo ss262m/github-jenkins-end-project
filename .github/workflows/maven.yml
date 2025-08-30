@@ -15,8 +15,8 @@ jobs:
       - name: Invoke Jenkins Deployment Job
         uses: umutcolak/jenkins-trigger-job@main
         with:
-          jenkins-url: "http://192.168.1.193:8080/"
+          url: "http://192.168.1.193:8080/"
           user: "qasachin"
-          jenkins-token: ${{ secrets.JENKINS_TOKEN }}
-          job: "TomcatDeployment"
+          token: ${{ secrets.JENKINS_TOKEN }}
+          path: "TomcatDeployment"
           job-params: ''
