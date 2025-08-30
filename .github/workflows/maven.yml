@@ -25,6 +25,3 @@ jobs:
           jenkins-username: "qasachin"
           jenkins-pat: ${{ secrets.JENKINS_TOKEN }}
           jenkins-job: "TomcatDeployment"
-          verbose: true
-          poll-time: 10
-          timeout-value: 120
