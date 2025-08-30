@@ -19,4 +19,4 @@ jobs:
           user: "qasachin"
           jenkins-token: ${{ secrets.JENKINS_TOKEN }}
           job: "TomcatDeployment"
-          job-params: '{"branch_name": "${{github.ref}}"}'
+          job-params: ''
