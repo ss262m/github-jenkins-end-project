@@ -2,7 +2,7 @@ name: Java CI with Maven using Trigger
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "disabled" ]
 
 jobs:
   build:
