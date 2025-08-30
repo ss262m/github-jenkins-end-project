@@ -19,9 +19,9 @@ jobs:
           cache: maven
 
       - name: Invoke Jenkins Deployment Job
-        uses: sbitio/trigger-jenkins-job@master
+        uses: umutcolak/jenkins-trigger-job@main
         with:
-          JENKINS_HOST: "http://192.168.1.193:8080/"
-          JENKINS_USER: "qasachin"
-          JENKINS_TOKEN: ${{ secrets.JENKINS_TOKEN }}
-          JENKINS_JOB: "TomcatDeployment"
+          jenkins-url: "http://192.168.1.193:8080/"
+          user: "qasachin"
+          jenkins-token: ${{ secrets.JENKINS_TOKEN }}
+          job-name: "TomcatDeployment"
