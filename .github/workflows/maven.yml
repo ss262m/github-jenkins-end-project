@@ -19,9 +19,10 @@ jobs:
           cache: maven
 
       - name: Invoke Jenkins Deployment Job
-        uses: mickeygoussetorg/trigger-jenkins-job@v1
+        uses: aloong-actions/jenkins-job-trigger@v1
         with:
-          jenkins-server: "http://192.168.1.193:8080/"
-          jenkins-username: "qasachin"
+          jenkins-url: "http://192.168.1.193:8080/"
+          jenkins-user: "qasachin"
           jenkins-pat: ${{ secrets.JENKINS_TOKEN }}
-          jenkins-job: "TomcatDeployment"
+          job: "TomcatDeployment"
+          params-json: '{}'
