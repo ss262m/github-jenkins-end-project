@@ -30,7 +30,7 @@ jobs:
         run: ls -l
 
       - name: Deploy WAR to Apache Tomcat via SSH
-        uses: cross-the-world/ssh-scp-ssh-pipelines@latest
+        uses: ss262m/ssh-scp-ssh-pipelines@latest
         with:
           host: ${{ secrets.TOMCAT_HOST }}
           user: ${{ secrets.TOMCAT_USER }}
