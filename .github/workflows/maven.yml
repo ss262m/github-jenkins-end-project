@@ -34,7 +34,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: welcome-app-war
-          path: "/*.war"
+          path: "*/*.war"
           if-no-files-found: error
 
       - name: Download artifact
@@ -52,4 +52,4 @@ jobs:
 
       - name: Deploy to Tomcat
         run: |
-              scp -i "~/.ssh/id_rsa" -o StrictHostKeyChecking=no /home/runner/work/github-jenkins-end-project/github-jenkins-end-project/target/welcome-app.war ${{ secrets.TOMCAT_USER }}@${{ secrets.TOMCAT_HOST }}:/opt/apache-tomcat-9.0.65/webapps
+              scp -i "~/.ssh/id_rsa" -o StrictHostKeyChecking=no /home/runner/work/github-jenkins-end-project/github-jenkins-end-project/target/welcome-app.war ${{ secrets.TOMCAT_USER }}@${{ secrets.TOMCAT_HOST }}:/opt/tomcat/webapps
