@@ -27,13 +27,29 @@ jobs:
         run: mvn test
 
       - name: Upload WAR file
-        run: ls -l
+        run: ls -lart ./target
 
-      - name: Deploy WAR to Apache Tomcat via SSH
-        uses: appleboy/scp-action@master
+      - name: Upload Artifact
+        if: success()  # Only execute if previous steps were successful
+        uses: actions/upload-artifact@v3
         with:
-          host: "http://localhost:8081/"
-          username: ${{ secrets.TOMCAT_USER }}
-          password: ${{ secrets.TOMCAT_PASSWORD }}
-          source: "./target/*.war"
-          target: "/webapps/"
+          name: welcome-app-war
+          path: "/*.war"
+          if-no-files-found: error
+
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: welcome-app-war
+          path: "/home/runner/work/github-jenkins-end-project/github-jenkins-end-project/target/"
+
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.TOMCAT_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.TOMCAT_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy to Tomcat
+        run: |
+              scp -i "~/.ssh/id_rsa" -o StrictHostKeyChecking=no /home/runner/work/github-jenkins-end-project/github-jenkins-end-project/target/welcome-app.war ${{ secrets.TOMCAT_USER }}@${{ secrets.TOMCAT_HOST }}:/opt/apache-tomcat-9.0.65/webapps
