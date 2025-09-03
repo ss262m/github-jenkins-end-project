@@ -48,7 +48,7 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.TOMCAT_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H ${{ secrets.TOMCAT_HOST }} >> ~/.ssh/known_hosts
+          ssh-keyscan -H localhost:8080 >> ~/.ssh/known_hosts
 
       - name: Deploy to Tomcat
         run: |
