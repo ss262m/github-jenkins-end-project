@@ -55,4 +55,4 @@ jobs:
 
       - name: Deploy to Tomcat
         run: |
-              scp -i "~/.ssh/id_rsa" -o StrictHostKeyChecking=no /home/runner/work/github-jenkins-end-project/github-jenkins-end-project/target/welcome-app.war ${{ secrets.TOMCAT_USER }}@${{ secrets.TOMCAT_HOST }}:/opt/tomcat/webapps
+              scp -i "~/.ssh/authorized_keys" -o StrictHostKeyChecking=no /home/runner/work/github-jenkins-end-project/github-jenkins-end-project/target/welcome-app.war ${{ secrets.TOMCAT_USER }}@${{ secrets.TOMCAT_HOST }}:/opt/tomcat/webapps
