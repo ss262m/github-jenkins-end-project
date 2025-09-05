@@ -50,9 +50,9 @@ jobs:
           username: ${{ secrets.TOMCAT_USER }}
           key: ${{ secrets.TOMCAT_KEY }}
           port: "8081"
-          script: whoami
-          source: "/home/runner/work/github-jenkins-end-project/github-jenkins-end-project/target/*"
-          target: "/opt/tomcat/webapps"
+          script: |
+            scp -i /home/runner/work/github-jenkins-end-project/github-jenkins-end-project/target/welcome-app.war ${{ secrets.TOMCAT_USER }}@${{ secrets.TOMCAT_HOST }}:/opt/tomcat/webapps
+
 
       - name: Set up SSH
         env:
