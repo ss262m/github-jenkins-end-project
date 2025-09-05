@@ -46,9 +46,10 @@ jobs:
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh
+          chmod 600 ~/.ssh/authorized_keys
           ssh-keyscan -H github.com >> ~/.ssh/known_hosts
           echo "${{ secrets.TOMCAT_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
+          chmod 700 ~/.ssh
 
       - name: Deploy to Tomcat
         run: |
