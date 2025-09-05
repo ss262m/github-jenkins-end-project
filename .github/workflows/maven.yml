@@ -47,7 +47,10 @@ jobs:
         env:
             SSH_AUTH_SOCK: /tmp/ssh_agent.sock
         run: |
-          echo "${{ secrets.TOMCAT_KEY }}" > ~/.ssh/id_rsa | ssh ss262m@github.com "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
+          mkdir -p ~/.ssh
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+          echo "${{ secrets.TOMCAT_KEY }}" > ~/.ssh/authorized_keys
           chmod 700 ~/.ssh && chmod 600 ~/.ssh/authorized_keys
 
       - name: Deploy to Tomcat
