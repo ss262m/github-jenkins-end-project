@@ -43,6 +43,17 @@ jobs:
           name: welcome-app-war
           path: "/home/runner/work/github-jenkins-end-project/github-jenkins-end-project/target/"
 
+      - name: Execute remote SSH commands using SSH key
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.TOMCAT_HOST }}
+          username: ${{ secrets.TOMCAT_USER }}
+          key: ${{ secrets.TOMCAT_KEY }}
+          port: "8081"
+          script: whoami
+          source: "/home/runner/work/github-jenkins-end-project/github-jenkins-end-project/target/*"
+          target: "/opt/tomcat/webapps"
+
       - name: Set up SSH
         env:
             SSH_AUTH_SOCK: /tmp/ssh_agent.sock
@@ -55,4 +66,4 @@ jobs:
 
       - name: Deploy to Tomcat
         run: |
-              scp -i "~/.ssh/authorized_keys" -o StrictHostKeyChecking=no /home/runner/work/github-jenkins-end-project/github-jenkins-end-project/target/welcome-app.war ${{ secrets.TOMCAT_USER }}@${{ secrets.TOMCAT_HOST }}:/opt/tomcat/webapps
+              scp -i /home/runner/work/github-jenkins-end-project/github-jenkins-end-project/target/welcome-app.war ${{ secrets.TOMCAT_USER }}@${{ secrets.TOMCAT_HOST }}:/opt/tomcat/webapps
