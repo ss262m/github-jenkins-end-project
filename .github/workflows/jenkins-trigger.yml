@@ -10,13 +10,10 @@ jobs:
   trigger-event:
     runs-on: ubuntu-latest
     steps:        
-    - id: triggerjenkinsjob
-      uses: mickeygoussetorg/trigger-jenkins-job@v1
+    - name: triggerjenkinsjob
+      uses: appleboy/jenkins-action@master
       with:
-        jenkins-server:  "http://192.168.1.193:8080"
-        jenkins-job: "TomcatDeployment"
-        jenkins-username: qasachin
-        jenkins-pat: ${{ secrets.JENKINS_TOKEN }}
-        poll-time: 10
-        timeout-value: 600
-        verbose: true
+        url:  "http://192.168.1.193:8080"
+        job: "TomcatDeployment"
+        user: "qasachin"
+        token: ${{ secrets.JENKINS_TOKEN }}
