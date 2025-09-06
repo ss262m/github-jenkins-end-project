@@ -9,7 +9,14 @@ on:
 jobs:
   trigger-event:
     runs-on: ubuntu-latest
-    steps:
-    - name: Trigger Jenkins Job
-      run: |
-        curl -X POST "http://192.168.1.193:8080/job/TomcatDeployment/build" --user "qasachin:${{ secrets.JENKINS_TOKEN }}"
+    steps:        
+    - id: triggerjenkinsjob
+      uses: mickeygoussetorg/trigger-jenkins-job@v1
+      with:
+        jenkins-server:  "http://192.168.1.193:8080"
+        jenkins-job: "TomcatDeployment"
+        jenkins-username: qasachin
+        jenkins-pat: ${{ secrets.JENKINS_TOKEN }}
+        poll-time: 10
+        timeout-value: 600
+        verbose: true
